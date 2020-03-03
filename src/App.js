@@ -41,18 +41,21 @@ function App() {
         <div>
           {todos.map(todoInList => {
             return (
-              <div key={todoInList.id}>
+              <div
+                style={{ border: '1px solid grey', marginBottom: '20px' }}
+                key={todoInList.id}
+              >
                 <button onClick={() => deleteTodo(todoInList.id)}>x</button>
 
                 <input
                   type="checkbox"
                   checked={todoInList.completed}
-                  onChange={() => {
+                  onChange={event => {
                     setTodos(
                       todos.map(todo => {
                         const newTodo = { ...todo };
-                        if (todo.id === todoInList.id)
-                          todo.completed = !todo.completed;
+                        if (newTodo.id === todoInList.id)
+                          newTodo.completed = event.target.checked;
                         return newTodo;
                       }),
                     );
